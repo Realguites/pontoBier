@@ -1,40 +1,37 @@
 plugins {
-	id 'java'
-	id 'war'
-	id 'org.springframework.boot' version '3.0.6'
-	id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version '2.6.2'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
 }
 
-group = 'com.example.pontoBier'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+group 'com.guilherme'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
-}
-
-ext {
-	set('testcontainersVersion', "1.18.1")
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	runtimeOnly 'com.h2database:h2'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	implementation 'javax.persistence:javax.persistence-api:2.2'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.6'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.openpnp:opencv:4.7.0-0'
 
-
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-dependencyManagement {
-	imports {
-		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
-	}
+// Configuração do banco de dados PostgreSQL
+springBoot {
+    buildInfo()
+    mainClass = 'com.guilherme.pontoBier.PontoBierApplication'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
 }
+

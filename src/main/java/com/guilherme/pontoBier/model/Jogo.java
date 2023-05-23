@@ -1,14 +1,25 @@
-package com.example.pontoBier.pontoBier.model;
+package com.guilherme.pontoBier.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.Map;
 
 
 @Entity
-public class Jogo extends Basic{
+public class Jogo{
 
-    private Map<Jogador, Long> pontuacao;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+    public Long getId(){
+        return this.id;
+    }
+    //private Map<Jogador, Long> pontuacao;
     private Date data;
     private Double nrCervejas;
 
@@ -17,13 +28,6 @@ public class Jogo extends Basic{
     }
 
 
-    public Map<Jogador, Long> getPontuacao() {
-        return pontuacao;
-    }
-
-    public void setPontuacao(Map<Jogador, Long> pontuacao) {
-        this.pontuacao = pontuacao;
-    }
 
     public Date getData() {
         return data;

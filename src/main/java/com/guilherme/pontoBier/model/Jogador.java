@@ -1,10 +1,21 @@
-package com.example.pontoBier.pontoBier.model;
+package com.guilherme.pontoBier.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-public class Jogador extends Basic{
+public class Jogador{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+    public Long getId(){
+        return this.id;
+    }
     private String nome;
     private String apelido;
     private Double cervejasTomadas;
